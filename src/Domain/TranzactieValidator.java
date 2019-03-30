@@ -1,7 +1,9 @@
 package Domain;
 
-public class TranzactieValidator {
+public class TranzactieValidator implements IValidator<Tranzactie> {
 
+        public TranzactieValidator() {
+        }
 
         public void validate(Tranzactie Tranzactie) {
 

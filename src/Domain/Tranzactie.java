@@ -1,8 +1,8 @@
 package Domain;
 
-public class Tranzactie {
+public class Tranzactie extends Entity {
 
-    private String id_tranzactie;
+    //private String id_tranzactie;
     private String id_medicament;
     private String id_card_client;
     private String nr_bucati;
@@ -11,13 +11,24 @@ public class Tranzactie {
     private  double discount;
 
     public Tranzactie(String id_tranzactie, String id_medicament, String id_card_client, String nr_bucati, String date, String hour,double discount) {
-        this.id_tranzactie = id_tranzactie;
+        super(id_tranzactie);
         this.id_medicament = id_medicament;
         this.id_card_client = id_card_client;
         this.nr_bucati = nr_bucati;
         this.date = date;
         this.hour = hour;
         this.discount = discount;
+    }
+
+    @Override
+    public String toString() {
+        return "TranzactionId: "+ this.getId()
+                +"ID Medicament: "+this.id_medicament
+                +"ID Card Client: "+this.id_card_client
+                +"Nr Bucati: "+this.nr_bucati
+                +"Date: "+ this.date
+                +"Hour: " + this.hour
+                +"Discount: " + this.discount;
     }
 
     public double getDiscount() {
@@ -28,14 +39,6 @@ public class Tranzactie {
         this.discount = discount;
     }
 
-
-    public String getId_tranzactie() {
-        return id_tranzactie;
-    }
-
-    public void setId_tranzactie(String id_tranzactie) {
-        this.id_tranzactie = id_tranzactie;
-    }
 
     public String getId_medicament() {
         return id_medicament;

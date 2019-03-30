@@ -6,7 +6,7 @@ import Domain.Tranzactie;
 import Service.CardClientService;
 import Service.MedicamentService;
 import Service.TranzactieService;
-
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Console {
@@ -19,12 +19,12 @@ public class Console {
 
         public Console(MedicamentService MedicamentService, CardClientService b, TranzactieService TranzactieService) {
             this.MedicamentService = MedicamentService;
-            this.CardClientService = b;
+            this.CardClientService = CardClientService;
             this.TranzactieService = TranzactieService;
             this.scanner = new Scanner(System.in);
         }
 
-        public void run() {
+       public void run() {
             while (true) {
                 showMenu();
 
@@ -91,6 +91,9 @@ public class Console {
                 case "4":
                     handleShowAllTransactios();
                     break;
+                /*case "5":
+                    handleShowAllTransactionFromAGivenRange();
+                    break;*/
                 case "x":
                     return;
                 default:
@@ -99,6 +102,9 @@ public class Console {
         }
     }
 
+    private void handleShowAllTransactionFromAGivenRange(){
+
+    }
 
     private void runCardClient() {
         while (true) {
@@ -125,37 +131,57 @@ public class Console {
         }
     }
         private void handleShowAllMedicament() {
-            for (Medicament Medicament : MedicamentService.getAll()) {
-                System.out.println( "Id Medicament: " + Medicament.getId() +
-                                    "\nMedicament Name:  "+ Medicament.getName()+
-                                    "\nProducer: "+Medicament.getProducator() +
-                                    "\nPrice: "+ Medicament.getPrice() +
-                                    "\nRecept: " + Medicament.getReteta());
+            Iterator var1 = this.MedicamentService.getAll().iterator();
+
+            while(var1.hasNext()) {
+                Medicament medicament = (Medicament)var1.next();
+                System.out.println(medicament);
             }
+           /* for (Medicament Medicament : MedicamentService.getAll()) {
+                System.out.println( "  Id Medicament: " + Medicament.getId() +
+                                    "; Medicament Name:  "+ Medicament.getName()+
+                                    "; Producer: "+Medicament.getProducator() +
+                                    "; Price: "+ Medicament.getPrice() +
+                                    "; Recept: " + Medicament.getReteta() +"\n");
+            }*/
         }
 
     private void handleShowAllCardClients() {
-        for (CardClient CardClient : CardClientService.getAll()) {
-            System.out.println("Id Card Client: "+ CardClient.getIdCard() +
-                    "\nCard Name: "+ CardClient.getName()+
-                    "\nCard First Name:  "+CardClient.getFirstname() +
-                    "\nCNP: "+ CardClient.getCNP() +
-                    "\nDate of registration: " + CardClient.getDateOfRegistration() +
-                    "\nDate of birth: "+ CardClient.getDateOfBirth());
+        Iterator var1 = this.CardClientService.getAll().iterator();
+
+        while(var1.hasNext()) {
+            CardClient cardClient = (CardClient)var1.next();
+            System.out.println(cardClient);
         }
+
+       /* for (CardClient CardClient : CardClientService.getAll()) {
+            System.out.println("Id Card Client: "+ CardClient.getId() +
+                    "; Card Name: "+ CardClient.getName()+
+                    "; Card First Name:  "+CardClient.getFirstname() +
+                    "; CNP: "+ CardClient.getCNP() +
+                    "; nDate of registration: " + CardClient.getDateOfRegistration() +
+                    "; Date of birth: "+ CardClient.getDateOfBirth());
+        }*/
     }
 
 
     private void handleShowAllTransactios() {
-        for (Tranzactie Tranzactie : TranzactieService.getAll()) {
-            System.out.println( "Transaction: "+ Tranzactie.getId_tranzactie() +
-                                "\nID Medicament: "+ Tranzactie.getId_medicament()+
-                                "\nID Card Client:  "+Tranzactie.getId_card_client() +
-                                "\nNr. Bucati:  "+ Tranzactie.getNr_bucati() +
-                                "\nDate: "+Tranzactie.getDate() +
-                                "\nHour: "+ Tranzactie.getHour()+
-                                "\nDiscount: "+ Tranzactie.getDiscount());
+        Iterator var1 = this.TranzactieService.getAll().iterator();
+
+        while(var1.hasNext()) {
+            Tranzactie tranzactie = (Tranzactie) var1.next();
+            System.out.println(tranzactie);
         }
+
+            /* for (Tranzactie Tranzactie : TranzactieService.getAll()) {
+            System.out.println( "Transaction: "+ Tranzactie.getId_tranzactie() +
+                                "; ID Medicament: "+ Tranzactie.getId_medicament()+
+                                "; ID Card Client:  "+Tranzactie.getId_card_client() +
+                                "; Nr. Bucati:  "+ Tranzactie.getNr_bucati() +
+                                "; Date: "+Tranzactie.getDate() +
+                                "; Hour: "+ Tranzactie.getHour()+
+                                "; Discount: "+ Tranzactie.getDiscount()+ "\n");
+        }*/
     }
 
 
@@ -351,6 +377,7 @@ public class Console {
         System.out.println("2. Update transaction");
         System.out.println("3. Remove transaction");
         System.out.println("4. Show all");
+        System.out.println("4. Show all the transaction from a given range");
         System.out.println("x. Back");
     }
 
@@ -369,5 +396,7 @@ public class Console {
             System.out.println("3. CRUD Transactions");
             System.out.println("x. Exit");
         }
-    }
+
+
+}
 

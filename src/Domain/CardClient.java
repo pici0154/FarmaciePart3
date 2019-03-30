@@ -1,8 +1,9 @@
 package Domain;
+import java.util.Objects;
 
-public class CardClient {
+public class CardClient extends Entity {
 
-    private String idCard;
+ //   private String idCard;
     private String name;
     private String firstname;
     private String CNP;
@@ -10,7 +11,7 @@ public class CardClient {
     private String DateOfRegistration;
 
     public CardClient(String idCard, String name, String firstname, String CNP, String dateOfBirth, String dateOfRegistration) {
-        this.idCard = idCard;
+        super(idCard);
         this.name = name;
         this.firstname = firstname;
         this.CNP = CNP;
@@ -18,14 +19,13 @@ public class CardClient {
         DateOfRegistration = dateOfRegistration;
     }
 
-
-    public String getIdCard() {
-        return idCard;
+    @Override
+    public String toString() {
+        return "ClientId: "+ this.getId()+"Name: "+this.name +"Firstname: "+this.firstname
+                +"CNP: "+this.CNP +"DateOfBirth: "+ this.DateOfBirth+"Date of registration: " + this.DateOfRegistration ;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
+
 
     public String getName() {
         return name;

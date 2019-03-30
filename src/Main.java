@@ -1,33 +1,52 @@
-import Domain.CardClientValidator;
-import Domain.MedicamentValidator;
-import Domain.TranzactieValidator;
-import Repository.CardClientRepository;
-import Repository.MedicamentRepository;
-import Repository.TranzactieRepository;
+import Domain.*;
+import Repository.InMemoryRepository;
+import  Repository.IRepository;
 import Service.CardClientService;
 import Service.MedicamentService;
 import Service.TranzactieService;
 import UI.Console;
-
-    public class Main {
-
-        public static void main(String[] args) {
-            MedicamentValidator MedicamentValidator = new MedicamentValidator();
-            MedicamentRepository MedicamentRepository = new MedicamentRepository(MedicamentValidator);
-            MedicamentService MedicamentService = new MedicamentService(MedicamentRepository);
-
-
-            CardClientValidator CardClVal = new CardClientValidator();
-            CardClientRepository CardClRepo = new CardClientRepository(CardClVal);
-            CardClientService cardClServ = new CardClientService(CardClRepo);
-
-            TranzactieValidator TranzactieValidator = new TranzactieValidator();
-            TranzactieRepository TranzactieRepository = new TranzactieRepository(TranzactieValidator);
-            TranzactieService TranzactieService = new TranzactieService(TranzactieRepository, MedicamentRepository);
+import UI.MainController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
-            Console console = new Console(MedicamentService, cardClServ, TranzactieService);
-            console.run();
+    public class Main extends Application {
+
+        @Override
+        public  void start(Stage primaryStage) throws Exception{
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UI/mainWindow.fxml"));
+           // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UI/NewWindow.fxml"));
+            Parent root = fxmlLoader.load();
+
+            IValidator<Medicament> medicamentValidator = new MedicamentValidator();
+            IValidator<CardClient> cardClientValidator = new CardClientValidator();
+            IValidator<Tranzactie> transactionValidator = new TranzactieValidator();
+
+            IRepository<Medicament> medicamentRepository = new InMemoryRepository(medicamentValidator);
+            IRepository<CardClient> cardClientRepository = new InMemoryRepository(cardClientValidator);
+            IRepository<Tranzactie> transactionRepository = new InMemoryRepository(transactionValidator);
+
+            MedicamentService medicamentService = new MedicamentService(medicamentRepository);
+            CardClientService cardClientService = new CardClientService(cardClientRepository);
+            TranzactieService transactionService = new TranzactieService(transactionRepository, medicamentRepository);
+
+          //  Console console = new Console(medicamentService, cardClientService, transactionService);
+            // console.run();
+
+            MainController mainController = fxmlLoader.getController();
+            mainController.setServices(medicamentService,cardClientService,transactionService);
+
+            primaryStage.setTitle("Medicamente");
+            primaryStage.setScene(new Scene(root, 450, 500));
+            primaryStage.show();
+        }
+
+        public static void main (String [] args){
+            launch(args);
         }
     }
 

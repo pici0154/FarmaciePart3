@@ -1,7 +1,8 @@
 package Domain;
 
-public class CardClientValidator {
-
+public class CardClientValidator implements  IValidator<CardClient> {
+    public CardClientValidator() {
+    }
 
     public void validate(CardClient CardClient) {
 

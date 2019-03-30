@@ -1,6 +1,8 @@
 package Domain;
 
-public class MedicamentValidator {
+public class MedicamentValidator implements IValidator<Medicament> {
+    public MedicamentValidator() {
+    }
 
     public void validate(Medicament medicament) {
 
