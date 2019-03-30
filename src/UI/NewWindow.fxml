@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?><?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+
+<HBox fx:controller="UI.MainController"
+      xmlns:fx="http://javafx.com/fxml" alignment="center">
+
+    <VBox>
+        <TableView fx:id="tblTranzactie" editable="true">
+            <columns>
+                <TableColumn fx:id="colIdTranzactie" text="Id tranzactie">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id_tranzactie" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colIDMedicament" text="Id medicament">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id_medicament" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colIdCardClient" text="Id card client">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id_card_client" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colNrbucati" text="Nr bucati">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nr_bucati" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colDate" text="Date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="date" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colHour" text="Hour">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="hour" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colDiscount" text="Discount">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="discount" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <TextField fx:id="txtTranzactieID" promptText="ID Tranzactie"/>
+        <TextField fx:id="txtTranzactietIDMedicament" promptText="ID Medicament"/>
+        <TextField fx:id="txtIDCardClientTranzactieMedicament" promptText="Id Card Client"/>
+        <TextField fx:id="txtNr_bucati" promptText="Nr bucati"/>
+        <TextField fx:id="txtDate" promptText="Date"/>
+        <TextField fx:id="txtHour" promptText="Hour"/>
+
+        <Button fx:id="btnAdddTranzactie" text="Add Medicament" onAction="#btnAddTranzactieClick"/>
+    </VBox>
+
+</HBox>
